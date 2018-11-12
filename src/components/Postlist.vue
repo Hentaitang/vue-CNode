@@ -1,0 +1,129 @@
+<template>
+  <div class="Postlist">
+    <ul>
+      <li>
+        <span>全部</span>
+        <span>精华</span>
+        <span>分享</span>
+        <span>问答</span>
+        <span>招聘</span>
+        <span>客户端测试</span>
+      </li>
+      <li v-for="post in posts" :key="post.id">
+        <img :src="post.author.avatar_url">
+        <span class="visit">
+          <span class="reply_count">{{post.reply_count}}</span>/{{post.visit_count}}
+        </span>
+        <span class="title">
+          {{post.title}}
+        </span>
+        <span class="time">
+          {{changeTime(post.last_reply_at)}}
+        </span>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+import changeTime from '../helpers/util'
+export default {
+  name: 'postlist',
+  data(){
+    return {
+      posts: []
+    }
+  },
+  methods: {
+    getData(){
+      this.$http.get('https://cnodejs.org/api/v1/topics')
+      .then((res)=>{
+          console.log(res.data.data[0])
+          this.posts = res.data.data
+        })
+    }
+  },
+  created(){
+    this.getData()
+  }
+}
+</script>
+
+
+<style scoped>
+.Postlist{
+  background-color: #fff;
+  width: 80%;
+  margin: 0 auto;
+}
+img{
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+}
+ul{
+  margin-top: 15px;
+}
+ul > li:nth-child(1){
+  background-color: #f0f0f0;
+  color: #80bd01;
+}
+ul > li:nth-child(1) > span{
+  margin: 0 10px;
+}
+
+li{
+  list-style: none;
+  padding: 10px;
+  font-size: 14px;
+  border-top: 1px solid #f0f0f0;
+  color: #b4b4b4;
+  position: relative;
+}
+
+li:hover{
+  background: #f0f0f0;
+}
+
+.reply_count{
+  color: #9e78c0;
+  font-size: 13px;
+}
+
+.title{
+  color: #333;
+  font-size: 16px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 110px;
+  max-width: 60%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.visit{
+  font-size: 10px;
+  width: 70px;
+  text-align: center;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.time{
+  color: #778087;
+  font-size: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+}
+
+
+span{
+  
+}
+</style>

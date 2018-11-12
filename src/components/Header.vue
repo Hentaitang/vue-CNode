@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'header'
+  name: 'Header'
 }
 </script>
 
@@ -31,7 +31,6 @@ img{
 }
 ul{
   list-style: none;
-  color: #ccc;
   font-size: 13px;
   float: right;
   margin-top: 6px;
@@ -40,5 +39,9 @@ ul{
 li{
   display: inline-block;
   padding: 10px 15px;
+  color: #ccc;
+}
+li:hover{
+  color: #FFFFFF;
 }
 </style>
