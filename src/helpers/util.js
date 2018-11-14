@@ -16,11 +16,28 @@ let changeTime = function(value){
             str = Math.floor(space/(60000*60)) + '小时前'
             break
         default: 
-        str = Math.floor(space/(60000*60*24)) + '天前'
+            str = Math.floor(space/(60000*60*24)) + '天前'
             break
     }
 
     return str
 }
 
-export default changeTime
+let tabChange = function(value){
+    if(value.good){
+        return '精华'
+    }else if(value.top){
+        return '置顶'
+    }else if(value.tab === 'ask'){
+        return '问答'
+    }else if(value.tab === 'share'){
+        return '分享'
+    }else{
+        return '招聘'
+    }
+}
+
+export default {
+    tabChange,
+    changeTime
+}

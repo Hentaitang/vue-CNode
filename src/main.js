@@ -4,11 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
-import changeTime from '@/helpers/util'
+import util from '@/helpers/util'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
-Vue.prototype.changeTime = changeTime
+Vue.prototype.changeTime = util.changeTime
+Vue.prototype.tabChange = util.tabChange
 
 /* eslint-disable no-new */
 new Vue({

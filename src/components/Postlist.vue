@@ -1,6 +1,9 @@
 <template>
   <div class="Postlist">
-    <ul>
+    <div v-if="isLoading" class="loading">
+      <img src="../assets/loading.gif">
+    </div>
+    <ul v-else>
       <li>
         <span>全部</span>
         <span>精华</span>
@@ -15,7 +18,9 @@
           <span class="reply_count">{{post.reply_count}}</span>/{{post.visit_count}}
         </span>
         <span class="title">
-          {{post.title}}
+          <span :class="{top: post.top, good: post.good}" class="need">
+            {{tabChange(post)}}
+          </span> {{post.title}}
         </span>
         <span class="time">
           {{changeTime(post.last_reply_at)}}
@@ -26,20 +31,20 @@
 </template>
 
 <script>
-import changeTime from '../helpers/util'
 export default {
   name: 'postlist',
   data(){
     return {
-      posts: []
+      posts: [],
+      isLoading: true
     }
   },
   methods: {
     getData(){
       this.$http.get('https://cnodejs.org/api/v1/topics')
       .then((res)=>{
-          console.log(res.data.data[0])
           this.posts = res.data.data
+          this.isLoading = false
         })
     }
   },
@@ -51,6 +56,19 @@ export default {
 
 
 <style scoped>
+.loading{
+  height: 90vh;
+  position: relative;
+  margin-top: 15px;
+}
+.loading img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 50px;
+}
 .Postlist{
   background-color: #fff;
   width: 80%;
@@ -103,6 +121,22 @@ li:hover{
   text-overflow: ellipsis;
 }
 
+.need{
+  padding: 2px 4px;
+  font-size: 12px;
+  color: #999;
+  background: #e5e5e5;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.need.top, .need.good{
+  background-color: #80bd01;
+  color: white;
+}
+
+
+
 .visit{
   font-size: 10px;
   width: 70px;
@@ -120,10 +154,5 @@ li:hover{
   top: 50%;
   transform: translateY(-50%);
   right: 10px;
-}
-
-
-span{
-  
 }
 </style>
