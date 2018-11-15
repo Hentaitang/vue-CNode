@@ -37,7 +37,20 @@ let tabChange = function(value){
     }
 }
 
+let needChange = function(value){
+    if(value.good){
+        return '精华'
+    }else if(value.tab === 'ask'){
+        return '问答'
+    }else if(value.tab === 'share'){
+        return '分享'
+    }else{
+        return '招聘'
+    }
+}
+
 export default {
     tabChange,
-    changeTime
+    changeTime,
+    needChange
 }

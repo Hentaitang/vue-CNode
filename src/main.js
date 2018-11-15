@@ -10,6 +10,7 @@ Vue.config.productionTip = false
 Vue.prototype.$http = axios
 Vue.prototype.changeTime = util.changeTime
 Vue.prototype.tabChange = util.tabChange
+Vue.prototype.needChange = util.needChange
 
 /* eslint-disable no-new */
 new Vue({

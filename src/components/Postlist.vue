@@ -20,7 +20,7 @@
         <span class="title">
           <span :class="{top: post.top, good: post.good}" class="need">
             {{tabChange(post)}}
-          </span> {{post.title}}
+          </span> <router-link :to="`/topic/${post.id}`">{{post.title}}</router-link>
         </span>
         <span class="time">
           {{changeTime(post.last_reply_at)}}
@@ -32,7 +32,6 @@
 
 <script>
 export default {
-  name: 'postlist',
   data(){
     return {
       posts: [],
@@ -49,6 +48,7 @@ export default {
     }
   },
   created(){
+    this.isLoading = true
     this.getData()
   }
 }
