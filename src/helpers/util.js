@@ -15,9 +15,14 @@ let changeTime = function(value){
         case space < 60000*60*24:
             str = Math.floor(space/(60000*60)) + '小时前'
             break
-        default: 
+        case space < 60000*60*24*30: 
             str = Math.floor(space/(60000*60*24)) + '天前'
             break
+        case space < 60000*60*24*30*12: 
+            str = Math.floor(space/(60000*60*24*30)) + '月前'
+            break
+        default:
+            str = Math.floor(space/(60000*60*24*30*12)) + '年前'
     }
 
     return str
@@ -38,9 +43,7 @@ let tabChange = function(value){
 }
 
 let needChange = function(value){
-    if(value.good){
-        return '精华'
-    }else if(value.tab === 'ask'){
+    if(value.tab === 'ask'){
         return '问答'
     }else if(value.tab === 'share'){
         return '分享'

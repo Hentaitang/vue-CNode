@@ -6,13 +6,13 @@
     <section v-else class="content">
       <div class="titleHeader">
         <div class="title">
-          <span v-if="blog.top" class="top">
+          <span v-if="blog.top || blog.good" class="top">
             {{tabChange(blog)}}
           </span> {{blog.title}}
         </div>
         <div class="introduction">
           <span>• 发布于{{changeTime(blog.create_at)}}</span>
-          <span>• 作者 {{blog.author.loginname}}</span>
+          <span>• 作者 <router-link :to="`/user/${blog.author.loginname}`">{{blog.author.loginname}}</router-link></span>
           <span>• {{blog.visit_count}}次浏览</span>
           <span>• 来自 {{needChange(blog)}}</span>
         </div>
@@ -23,9 +23,9 @@
       <div class="reply">{{blog.replies.length}} 回复</div>
       <ul class="allRep">
         <li v-for="(reply,index) in blog.replies" :key="reply.id">
-          <img :src="reply.author.avatar_url" alt="reply.author.loginname">
+          <router-link :to="`/user/${reply.author.loginname}`"><img :src="reply.author.avatar_url" :alt="reply.author.loginname"></router-link>
           <div class="userInfo">
-            <span class="name">{{reply.author.loginname}}</span>
+            <router-link :to="`/user/${reply.author.loginname}`" class="name"><span class="name">{{reply.author.loginname}}</span></router-link>
             <span>{{index+1}}楼•{{changeTime(reply.create_at)}}</span>
           </div>
           <p v-html="reply.content"></p>
@@ -48,7 +48,6 @@ export default {
       this.$http.get('https://cnodejs.org/api/v1/topic/'+this.$route.params.id)
       .then((res)=>{
           this.blog = res.data.data
-          console.log(this.blog)
           this.isLoading = false
         })
     }
@@ -83,7 +82,7 @@ export default {
   background-color: #fff;
   width: 80%;
   margin: 15px auto;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 .replies{
@@ -125,6 +124,10 @@ export default {
   color: #838383;
 }
 
+.introduction a{
+  color: #838383;
+}
+
 .blog{
   border-top: 1px solid #e5e5e5;
   padding: 10px 20px;
@@ -150,6 +153,10 @@ a:hover{
   overflow: auto;
   word-break: break-word;
   white-space: pre-wrap;
+}
+
+.markdown-text ul{
+  margin: 0 0 10px 25px;
 }
 
 .markdown-text img {
@@ -197,5 +204,16 @@ ul li img{
   position: absolute;
   left: 40px;
   top: 5px;
+}
+
+.name{
+  color: #666;
+  font-weight: 700;
+}
+
+.name:hover{
+  color: #385f8a;
+  text-decoration: none;
+  font-weight: 700;
 }
 </style>

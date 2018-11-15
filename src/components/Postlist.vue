@@ -13,7 +13,7 @@
         <span>客户端测试</span>
       </li>
       <li v-for="post in posts" :key="post.id">
-        <img :src="post.author.avatar_url">
+        <router-link :to="`/user/${post.author.loginname}`"><img :src="post.author.avatar_url"></router-link>
         <span class="visit">
           <span class="reply_count">{{post.reply_count}}</span>/{{post.visit_count}}
         </span>
@@ -109,16 +109,20 @@ li:hover{
 }
 
 .title{
-  color: #333;
   font-size: 16px;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-60%);
   left: 110px;
   max-width: 60%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.title a{
+  color: #333;
+  font-weight: normal;
 }
 
 .need{
@@ -134,8 +138,6 @@ li:hover{
   background-color: #80bd01;
   color: white;
 }
-
-
 
 .visit{
   font-size: 10px;
