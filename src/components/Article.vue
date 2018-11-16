@@ -20,7 +20,7 @@
       <div class="blog" v-html="blog.content"></div>
     </section>
     <section class="replies">
-      <div class="reply">{{blog.replies.length}} 回复</div>
+      <div class="reply">{{length}} 回复</div>
       <ul class="allRep">
         <li v-for="(reply,index) in blog.replies" :key="reply.id">
           <router-link :to="`/user/${reply.author.loginname}`"><img :src="reply.author.avatar_url" :alt="reply.author.loginname"></router-link>
@@ -40,7 +40,8 @@ export default {
   data(){
     return {
       blog: {},
-      isLoading: true
+      isLoading: true,
+      length: 0
     }
   },
   methods: {
@@ -49,6 +50,7 @@ export default {
       .then((res)=>{
           this.blog = res.data.data
           this.isLoading = false
+          this.length = this.blog.replies.length
         })
     }
   },

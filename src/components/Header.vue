@@ -2,12 +2,10 @@
   <div class="header">
     <router-link to="/"><img src="..\assets\cnodejs_light.svg" alt=""></router-link>
     <ul>
-      <li>首页</li>
+      <li><router-link to="/">首页</router-link></li>
       <li>新手入门</li>
       <li>API</li>
       <li>关于</li>
-      <li>注册</li>
-      <li>登录</li>
     </ul>
   </div>
 </template>
@@ -40,8 +38,15 @@ li{
   display: inline-block;
   padding: 10px 15px;
   color: #ccc;
+  cursor: pointer;
 }
-li:hover{
+li:hover,
+li a:hover{
   color: #FFFFFF;
+}
+
+li a{
+  color: #ccc;
+  text-decoration: none;
 }
 </style>

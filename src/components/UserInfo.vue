@@ -5,7 +5,7 @@
     </div>
     <div v-else>
       <section class="content">
-        <div class="topbar">主页 /</div>
+        <div class="topbar gang"><router-link to="/">主页</router-link> /</div>
         <main class="userInfo">
           <img :src="user.avatar_url" :alt="user.loginname">
           <span class="name">{{user.loginname}}</span>
@@ -36,7 +36,7 @@
         <main>
           <div class="topic" v-if="user.recent_topics.length === 0">无话题</div>
           <ul v-else>
-            <li v-for="topic in user.recent_topics" :key="topic.id">
+            <li v-for="topic in recentTopics" :key="topic.id">
               <router-link :to="`/user/${topic.author.loginname}`"><img :src="topic.author.avatar_url"></router-link>
               <span class="title">
                 <router-link :to="`/topic/${topic.id}`">{{topic.title}}</router-link>
@@ -61,6 +61,18 @@ export default {
       isLoading: true
     }
   },
+  computed:{
+    recentReplies(){
+      if(this.user.recent_replies){
+        return this.user.recent_replies.splice(0,5)
+      }
+    },
+    recentTopics(){
+      if(this.user.recent_topics){
+        return this.user.recent_topics.splice(0,5)
+      }
+    }
+  },
   methods: {
     getData(){
       this.$http.get('https://cnodejs.org/api/v1/user/'+this.$route.params.name)
@@ -73,6 +85,11 @@ export default {
   created(){
     this.isLoading = true
     this.getData()
+  },
+  watch: {
+    '$route'(to, from){
+      this.getData()
+    }
   }
 }
 </script>
@@ -132,6 +149,19 @@ main p{
   margin: 0;
 }
 
+.gang{
+  color: #ccc;
+}
+
+.topbar a{
+  color: #80bd01;
+  text-decoration: none;
+}
+
+.topbar a:hover{
+  text-decoration: underline;
+}
+
 img{
   width: 40px;
   border-radius: 2px;
@@ -184,6 +214,10 @@ li:hover{
   top: 50%;
   transform: translateY(-50%);
   right: 10px;
+}
+
+.topic{
+  padding: 10px;
 }
 
 </style>

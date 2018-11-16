@@ -123,6 +123,11 @@ li:hover{
 .title a{
   color: #333;
   font-weight: normal;
+  text-decoration: none;
+}
+
+.title a:hover{
+  text-decoration: underline;
 }
 
 .need{
