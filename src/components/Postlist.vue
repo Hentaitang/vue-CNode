@@ -20,7 +20,7 @@
         <span class="title">
           <span :class="{top: post.top, good: post.good}" class="need">
             {{tabChange(post)}}
-          </span> <router-link :to="`/topic/${post.id}`">{{post.title}}</router-link>
+          </span> <router-link :to="`/topic/${post.id}&${post.author.loginname}`">{{post.title}}</router-link>
         </span>
         <span class="time">
           {{changeTime(post.last_reply_at)}}

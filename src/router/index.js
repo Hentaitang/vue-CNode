@@ -13,7 +13,7 @@ export default new Router({
       component: Postlist
     },
     {
-      path: '/topic/:id',
+      path: '/topic/:id&:name',
       component: Article
     },
     {

@@ -21,7 +21,7 @@
             <li v-for="reply in user.recent_replies" :key="reply.id">
               <router-link :to="`/user/${reply.author.loginname}`"><img :src="reply.author.avatar_url"></router-link>
               <span class="title">
-                <router-link :to="`/topic/${reply.id}`">{{reply.title}}</router-link>
+                <router-link :to="`/topic/${reply.id}&${reply.author.loginname}`">{{reply.title}}</router-link>
               </span>
               <span class="time">
                 {{changeTime(reply.last_reply_at)}}
@@ -39,7 +39,7 @@
             <li v-for="topic in recentTopics" :key="topic.id">
               <router-link :to="`/user/${topic.author.loginname}`"><img :src="topic.author.avatar_url"></router-link>
               <span class="title">
-                <router-link :to="`/topic/${topic.id}`">{{topic.title}}</router-link>
+                <router-link :to="`/topic/${topic.id}&${topic.author.loginname}`">{{topic.title}}</router-link>
               </span>
               <span class="time">
                 {{changeTime(topic.last_reply_at)}}
