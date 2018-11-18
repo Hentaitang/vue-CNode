@@ -66,7 +66,13 @@ export default {
   created(){
     this.isLoading = true
     this.getData()
+  },
+  watch: {
+    '$route'(to, from){
+      this.getData()
+    }
   }
+  
 }
 </script>
 

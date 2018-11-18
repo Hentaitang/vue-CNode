@@ -3,7 +3,7 @@
     <div class="summay">
       <div class="topbar">作者</div>
       <router-link :to="`/user/${userinfo.loginname}`"><img :src="userinfo.avatar_url" alt=""></router-link>
-      <span>{{userinfo.loginname}}</span>
+      <span><router-link :to="`/user/${userinfo.loginname}`">{{userinfo.loginname}}</router-link></span>
       <p>积分：{{userinfo.score}}</p>
     </div>
     <div class="topics">
@@ -72,6 +72,9 @@ export default {
   }
   li{
     padding: 3px 0 ;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .replies ul, .topics ul {
     margin-top: 0px;
@@ -98,8 +101,21 @@ export default {
     width: 48px;
     border-radius: 3px;
     margin: 10px;
+    vertical-align: middle;
   }
 
+  .summay a{
+    color: #778087;
+  }
+
+  .summay a:hover{
+    text-decoration: none;
+  }
+
+  .summay p{
+    padding: 10px;
+    color: #333;
+  }
   .summay .topbar {
     margin-top: 0px;
   }
