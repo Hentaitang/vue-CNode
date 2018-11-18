@@ -26,25 +26,39 @@
           {{changeTime(post.last_reply_at)}}
         </span>
       </li>
+      <li class="Pagination"><Pagination @handleList="renderList"></Pagination></li>
     </ul>
   </div>
 </template>
 
 <script>
+import Pagination from './Pagination.vue'
 export default {
   data(){
     return {
       posts: [],
-      isLoading: true
+      isLoading: true,
+      postPage: 1
     }
+  },
+  components: {
+    Pagination
   },
   methods: {
     getData(){
-      this.$http.get('https://cnodejs.org/api/v1/topics')
+      this.$http.get('https://cnodejs.org/api/v1/topics', {
+        params: {
+          page: this.postPage
+        }
+      })
       .then((res)=>{
           this.posts = res.data.data
           this.isLoading = false
         })
+    },
+    renderList(value){
+      this.postPage = value
+      this.getData()
     }
   },
   created(){
@@ -161,5 +175,13 @@ li:hover{
   top: 50%;
   transform: translateY(-50%);
   right: 10px;
+}
+
+.Pagination{
+  border-top: 1px solid white;
+}
+
+.Pagination:hover{
+  background-color: white;
 }
 </style>
