@@ -1,21 +1,27 @@
-# cnodeode
+# Vue.js 技术栈搭建的CNODE社区
 
-> A Vue.js project
+> 本项目是一个高仿CNODE社区的网页项目 
+[项目预览链接](https://hentaitang.github.io/vue-CNode/dist/)
 
-## Build Setup
+## 本项目主要用到的技术栈:
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
+``` 
+vue.js计算属性
+vue.js的内置指令和事件的绑定
+vue.js的自定义事件和触发
+vue-router路由的跳转和监听
+父子组件之间的数据传递
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 本项目基本架构分为六个组件:
+
+``` 
+Header组件
+Postlist组件
+Article组件
+userinfo组件
+SlideBar组件
+Pagination组件
+```
+
+![项目样式](https://i.loli.net/2018/11/18/5bf180e77a3f1.png).
